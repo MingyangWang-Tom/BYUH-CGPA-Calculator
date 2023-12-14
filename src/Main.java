@@ -68,6 +68,7 @@ public class Main {
         List<SimpleEntry<Integer, String>> inputs = new ArrayList<>();
         //inputs.add(new SimpleEntry<>(3, 'A'));
 
+        //TODO more error handling
         int classNum = 1;
         while(true){
             System.out.print("Class " + classNum +": ");
