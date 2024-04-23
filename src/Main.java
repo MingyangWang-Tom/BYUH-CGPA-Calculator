@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 public class Main {
-    public static void calCGPA(double earnedCredit, double cGPA, double currSemCredit, double gpa){
-        System.out.println("Your CGPA is: " + (earnedCredit * cGPA + currSemCredit * gpa) / (earnedCredit + currSemCredit));
+    public static void calCGPA(double earnedCredit, double cGPA, double currSemCredit, double gpa) {
+        System.out.println(
+                "Your CGPA is: " + (earnedCredit * cGPA + currSemCredit * gpa) / (earnedCredit + currSemCredit));
     }
 
-    public static double calGPA(List<SimpleEntry<Integer, String>> inputs, int credit){
+    public static double calGPA(List<SimpleEntry<Integer, String>> inputs, int credit) {
         double currTotalPoints = 0;
         Map<String, Double> gpaScale = Map.ofEntries(
                 Map.entry("A", 4.0),
@@ -26,8 +26,7 @@ public class Main {
                 Map.entry("D", 1.0),
                 Map.entry("D-", 0.7),
                 Map.entry("F", 0.0),
-                Map.entry("WF", 0.0)
-        );
+                Map.entry("WF", 0.0));
 
         for (SimpleEntry<Integer, String> entry : inputs) {
             Integer key = entry.getKey();
@@ -35,12 +34,12 @@ public class Main {
             currTotalPoints += gpaScale.get(value) * key;
         }
 
-        double currGPA = currTotalPoints/credit;
+        double currGPA = currTotalPoints / credit;
         System.out.println("Your current semester GPA is: " + currGPA);
         return currGPA;
     }
 
-    public static int calCredit(List<SimpleEntry<Integer, String>> inputs){
+    public static int calCredit(List<SimpleEntry<Integer, String>> inputs) {
         int c = 0;
         for (SimpleEntry<Integer, String> entry : inputs) {
             Integer key = entry.getKey();
@@ -48,7 +47,6 @@ public class Main {
         }
         return c;
     }
-
 
     public static void main(String[] args) {
 
@@ -66,21 +64,21 @@ public class Main {
         System.out.println("Enter '-1' when you finish");
 
         List<SimpleEntry<Integer, String>> inputs = new ArrayList<>();
-        //inputs.add(new SimpleEntry<>(3, 'A'));
+        // inputs.add(new SimpleEntry<>(3, 'A'));
 
-        //TODO more error handling
+        // TODO more error handling
         int classNum = 1;
-        while(true){
-            System.out.print("Class " + classNum +": ");
+        while (true) {
+            System.out.print("Class " + classNum + ": ");
             String[] input = scanner.nextLine().split(" ");
-            if (input[0].equals("-1")){
+            if (input[0].equals("-1")) {
                 break;
-            } else if (input.length < 3){
+            } else if (input.length < 2) {
                 System.out.println("Missing Information. Please double check input");
                 continue;
             }
 
-            try{
+            try {
                 int classCredit = Integer.parseInt(input[0]);
                 inputs.add(new SimpleEntry<>(classCredit, input[1].toUpperCase()));
             } catch (NumberFormatException e) {
@@ -92,6 +90,6 @@ public class Main {
 
         int currentSemCredit = calCredit(inputs);
         double gpa = calGPA(inputs, currentSemCredit);
-        calCGPA(earnedCredit, cgpa, currentSemCredit,gpa);
+        calCGPA(earnedCredit, cgpa, currentSemCredit, gpa);
     }
 }
